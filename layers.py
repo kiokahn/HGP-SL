@@ -28,7 +28,8 @@ class TwoHopNeighborhood(object):
             value = value.view(-1, *[1 for _ in range(edge_attr.dim() - 1)])
             value = value.expand(-1, *list(edge_attr.size())[1:])
             edge_attr = torch.cat([edge_attr, value], dim=0)
-            data.edge_index, edge_attr = coalesce(edge_index, edge_attr, n, n, op='min', fill_value=fill)
+            #data.edge_index, edge_attr = coalesce(edge_index, edge_attr, n, n, op='min', fill_value=fill)
+            data.edge_index, edge_attr = coalesce(edge_index, edge_attr, n, n, op='min')
             edge_attr[edge_attr >= fill] = 0
             data.edge_attr = edge_attr
 
